@@ -15,6 +15,37 @@ You can run this app by clicking the exe file as usual. Simple way you can follo
 3. Make sure everything are good for the next step
 4. Run `mm.exe` to download every journal you wrote in `list.txt`
 
+OR
+
+You can run python file as usual
+
+1. Clone this repository 
+```bash
+  git clone https://github.com/mmaul8/Bulk-Paper-Downloader.git
+```
+2. Make sure you have journal/paper link list in `data.txt` file
+3. Run the python command in the repository folder
+```bash
+  python doi.py
+```
+or
+```bash
+  python3 doi.py
+```
+so you will see the program will run like this image below
+![App Screenshot](https://github.com/mmaul8/Bulk-Paper-Downloader/blob/main/img/doi.PNG?raw=true)
+
+4. After complete the first step run `mm.py` file
+```bash
+  python mm.py
+```
+or
+```bash
+  python3 mm.py
+```
+And you will see the program running like the image below
+![App Screenshot](https://github.com/mmaul8/Bulk-Paper-Downloader/blob/main/img/mm.PNG?raw=true)
+
 
 ## Hash Value Checker
 
