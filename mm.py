@@ -42,21 +42,27 @@ async def main():
             link = 'https://sci-hub.se'
             res = requests.get(link +'/'+ doi.strip())
             soup = BeautifulSoup(res.content, 'html.parser')
-            content = link + soup.find('embed').get('src').replace('#navpanes=0&view=FitH', '')
+            content = soup.find('embed').get('src').replace('#navpanes=0&view=FitH', '')
+
+            if content.startswith('//zero.sci-hub.se'):
+                j = 'https:'+ content
+            else:
+                j = link + content
         
-            req = requests.get(content, stream=True)
+            req = requests.get(j, stream=True)
             with open(DIR + '/' + name.replace('/', '-') + '.pdf', 'wb') as file:
                 file.write(req.content)
 
-            pdfs = open('DOI_Ditemukan.txt', 'a')
+            pdfs = open('File_PDF_Ditemukan.txt', 'a')
             pdfs.write(doi.strip() + '\t' + content + '\n')
     
         except:
 
-            ampas = open('DOI_Tidak_Ditemukan.txt', 'a')
+            ampas = open('File_PDF_Tidak_Ditemukan.txt', 'a')
             ampas.write(doi.strip() + '\n')
 
         await asyncio.sleep(1)
+    print('Proses Download Selesai.')
 
 os.system('@echo off')
 os.system('MODE 95,25')
