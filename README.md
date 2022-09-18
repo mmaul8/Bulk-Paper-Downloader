@@ -2,7 +2,7 @@
 # Bulk Paper Downloader
 
 This app help you to bulk download papers/journals you need. New update you can write your journal link list in `data.txt` file it was support for some journal/ publisher. Supported publisher:
-> ieeexplore, sciencedirect & springer
+> ieeexplore, sciencedirect, springer, aaai, acm dl & arxiv
 
 
 ## How To Use?
@@ -24,7 +24,7 @@ You can run python file as usual
   git clone https://github.com/mmaul8/Bulk-Paper-Downloader.git
 ```
 2. Make sure you have journal/paper link list in `data.txt` file
-3. Run the python command in the repository folder
+3. Run the python command in the repository folder, make sure you have all the libraries needed
 ```bash
   python doi.py
 ```
