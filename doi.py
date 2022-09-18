@@ -3,7 +3,6 @@ import os, requests, re, json, asyncio
 from colorama import Fore
 from bs4 import BeautifulSoup
 
-
 async def get_doi():
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.87 Safari/537.36",}
     
@@ -70,6 +69,46 @@ async def get_doi():
                 list.write(a + '\n')
                 await asyncio.sleep(1)
 
+            elif 'acm' in link:
+                ambil = link.replace('https://dl.acm.org/doi/abs/', '')
+
+                print(Fore.GREEN+link.strip() + ' | ' + ambil.strip())
+
+                log = open(dir + '/log-DOI.txt', 'a')
+                log.write(link.strip() + ' | '+ ambil)
+            
+                list = open('list.txt', 'a')
+                list.write(ambil)
+                await asyncio.sleep(1)
+            
+            elif 'aaai' in link:
+                ia = link.replace('\n', '')
+                res = requests.get(ia)
+                soup = BeautifulSoup(res.content, 'html.parser')
+                dia = soup.find('span', class_='value').text.strip()
+                d = dia.replace('https://doi.org/', '')
+
+                print(Fore.GREEN+link.strip() + ' | ' + d)
+
+                log = open(dir + '/log-DOI.txt', 'a')
+                log.write(link.strip() + ' | '+ d + '\n')
+            
+                list = open('list.txt', 'a')
+                list.write(d + '\n')
+                await asyncio.sleep(1)
+
+            elif 'arxiv' in link:
+                d = link.replace('https://arxiv.org/abs/', '10.48550/arXiv.')
+
+                print(Fore.GREEN+link.strip() + ' | ' + d.strip())
+
+                log = open(dir + '/log-DOI.txt', 'a')
+                log.write(link.strip() + ' | '+ d)
+            
+                list = open('list.txt', 'a')
+                list.write(d)
+                await asyncio.sleep(1)
+
             else:
                 print(Fore.RED+link.strip() + ' | DOI Tidak ditemukan!')
                 log = open(dir + '/error-DOI.txt', 'a')
@@ -91,6 +130,8 @@ print("#   Created by : _MMAUL_    #")
 print("#                           #")
 print("#   Get DOI not their doi!  #")
 print("#############################")
+print('This tool will automaticaly get DOI from your journal list link in data.txt file')
+print('*Attention this tool only support for\x1b[3m ieeexplore, sciencedirect, springer, aaai, acm dl, arxiv\x1b[0m')
 
 if __name__ == '__main__':
     asyncio.run(get_doi())
